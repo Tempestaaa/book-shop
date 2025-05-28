@@ -6,9 +6,9 @@ import FilterByPrice from "@/components/public/filter-by-price";
 import FilterHeader from "@/components/public/filter-header";
 import { Accordion } from "@/components/ui/accordion";
 
-export default function SidebarFilter() {
+export default function FilterSidebar() {
   return (
-    <aside className="w-60">
+    <aside className="col-span-3">
       <FilterHeader />
       <Accordion type="single" collapsible>
         <FilterByGenre />

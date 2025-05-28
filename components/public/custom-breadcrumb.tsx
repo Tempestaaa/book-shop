@@ -16,7 +16,7 @@ export default function CustomBreadcrumb() {
   breadcrumbs.shift();
 
   return (
-    <Breadcrumb className="mb-4">
+    <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/" className="text-muted">
@@ -25,12 +25,12 @@ export default function CustomBreadcrumb() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
 
-        <div className="flex items-center-safe gap-4">
+        <div className="flex items-center-safe gap-3">
           {breadcrumbs.map((item, id) => (
             <div key={id} className="capitalize flex items-center-safe gap-3">
               {id === breadcrumbs.length - 1 ? (
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{item}</BreadcrumbPage>
+                  <BreadcrumbPage className="font-bold">{item}</BreadcrumbPage>
                 </BreadcrumbItem>
               ) : (
                 <BreadcrumbItem>

@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function BookDetailsPage() {
   return (
-    <div className="flex flex-col gap-2 pb-16">
+    <div className="flex flex-col pb-16 gap-4">
       <CustomBreadcrumb />
 
       <section className="grid grid-cols-[repeat(12,minmax(0,1fr))] gap-8 mb-8">

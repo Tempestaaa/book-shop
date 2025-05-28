@@ -16,10 +16,10 @@ export default function ProductCard() {
         </Button>
       </div>
 
-      <div className="">
-        <header className="font-bold line-clamp-1">
+      <div className="max-w-60 mx-auto">
+        <Link href={`/shop/${123}`} className="font-bold line-clamp-1">
           This is the book's title
-        </header>
+        </Link>
         <div className="text-sm">Author name</div>
         <div className="flex items-center-safe gap-2 my-1">
           <StarRating rating={3.5} size="small" />

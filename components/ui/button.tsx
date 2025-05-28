@@ -13,7 +13,8 @@ const buttonVariants = cva(
           "bg-foreground text-background border-foreground shadow-xs hover:bg-background hover:text-foreground",
         destructive:
           "bg-destructive text-background border-destructive shadow-xs hover:bg-background hover:text-destructive",
-        ghost: "bg-background hover:bg-foreground hover:text-background",
+        ghost:
+          "bg-background hover:bg-foreground hover:text-background shadow-md",
       },
       size: {
         default: "h-10 px-4 py-2 has-[>svg]:px-3",

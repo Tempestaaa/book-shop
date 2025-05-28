@@ -8,7 +8,7 @@ export default function ShopHeader() {
     searchParams.get("genre")?.split("-").join(" ") || "All products";
 
   return (
-    <header className="h-14 text-2xl font-bold flex items-center-safe capitalize">
+    <header className="h-14 text-3xl font-bold flex items-center-safe capitalize">
       {header}
     </header>
   );

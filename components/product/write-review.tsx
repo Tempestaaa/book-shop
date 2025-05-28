@@ -1,7 +1,7 @@
-import InteractiveRating from "@/components/product/interactive-rating";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { PenLineIcon, User2Icon } from "lucide-react";
+import Link from "next/link";
 
 export default function WriteReview() {
   return (
@@ -15,10 +15,12 @@ export default function WriteReview() {
 
       <div className="text-5xl font-heading">What do you think?</div>
 
-      <Button className="mt-2 !px-6">
-        <PenLineIcon />
-        <span>Write a Review</span>
-      </Button>
+      <Link href={`/shop/123/review`}>
+        <Button className="mt-2 !px-6">
+          <PenLineIcon />
+          <span>Write a Review</span>
+        </Button>
+      </Link>
     </section>
   );
 }

@@ -1,13 +1,13 @@
 import CustomPagination from "@/components/public/custom-pagination";
 import ShopDisplay from "@/components/public/shop-display";
-import SidebarFilter from "@/components/public/sidebar-filter";
+import FilterSidebar from "@/components/public/filter-sidebar";
 
 export default function ShopPage() {
   return (
-    <div className="flex gap-8">
-      <SidebarFilter />
+    <div className="grid grid-cols-12 gap-8">
+      <FilterSidebar />
 
-      <div className="flex-1 flex flex-col gap-6">
+      <div className="col-span-9 flex flex-col gap-4">
         <ShopDisplay />
         <CustomPagination />
       </div>
