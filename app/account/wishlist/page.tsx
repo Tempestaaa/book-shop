@@ -1,7 +1,6 @@
 "use client";
 
 import ProductList from "@/components/product/product-list";
-import CustomPagination from "@/components/public/custom-pagination";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import Pagination from "@/components/ui/pagination";
 import { SortAscIcon, SortDescIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -58,7 +58,7 @@ export default function WishListPage() {
       <ProductList />
 
       <div className="mt-4">
-        <CustomPagination />
+        <Pagination />
       </div>
     </div>
   );

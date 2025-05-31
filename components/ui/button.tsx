@@ -5,16 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-muted focus-visible:ring-mutd/50 focus-visible:ring-2 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer border-2 border-transparent duration-300 text-sm",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-muted focus-visible:ring-mutd/50 focus-visible:ring-2 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer border-2 border-transparent duration-300 text-sm shadow-xs",
   {
     variants: {
       variant: {
         default:
-          "bg-foreground text-background border-foreground shadow-xs hover:bg-background hover:text-foreground",
+          "bg-foreground text-background border-foreground hover:bg-background hover:text-foreground",
         destructive:
-          "bg-destructive text-background border-destructive shadow-xs hover:bg-background hover:text-destructive",
+          "bg-destructive text-background border-destructive hover:bg-background hover:text-destructive",
         ghost:
-          "bg-background hover:bg-foreground hover:text-background shadow-md",
+          "bg-background hover:bg-foreground hover:text-background shadow-none",
       },
       size: {
         default: "h-10 px-4 py-2 has-[>svg]:px-3",

@@ -1,6 +1,6 @@
-import CustomPagination from "@/components/public/custom-pagination";
 import ShopDisplay from "@/components/public/shop-display";
 import FilterSidebar from "@/components/public/filter-sidebar";
+import Pagination from "@/components/ui/pagination";
 
 export default function ShopPage() {
   return (
@@ -9,7 +9,7 @@ export default function ShopPage() {
 
       <div className="col-span-9 flex flex-col gap-4">
         <ShopDisplay />
-        <CustomPagination />
+        <Pagination />
       </div>
     </div>
   );

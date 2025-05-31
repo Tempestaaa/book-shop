@@ -1,5 +1,5 @@
-import CustomPagination from "@/components/public/custom-pagination";
 import { Button } from "@/components/ui/button";
+import Pagination from "@/components/ui/pagination";
 import {
   Table,
   TableBody,
@@ -73,7 +73,7 @@ export default function OrdersPage() {
           </TableBody>
         </Table>
 
-        <CustomPagination />
+        <Pagination />
       </section>
     </article>
   );
