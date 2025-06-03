@@ -1,8 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+
+const filterThese = ["genre", "price", "format", "page", "availability"];
 
 export default function FilterHeader() {
   const pathname = usePathname();
@@ -11,11 +12,11 @@ export default function FilterHeader() {
 
   const showFilters = useMemo(() => {
     const keys = Array.from(searchParams.keys());
-    const notHasPage = keys.filter((k) => k !== "page");
+    const onlyFilters = keys.filter((k) => filterThese.includes(k));
 
     return {
-      length: notHasPage.length,
-      show: notHasPage.length > 0,
+      length: onlyFilters.length,
+      show: onlyFilters.length > 0,
     };
   }, [searchParams]);
 
@@ -28,9 +29,12 @@ export default function FilterHeader() {
       </h6>
 
       {showFilters.show && (
-        <Button variant="destructive" onClick={handleDeleteSearchParams}>
-          Clear
-        </Button>
+        <button
+          className="text-sm text-destructive font-bold hover:underline underline-offset-2"
+          onClick={handleDeleteSearchParams}
+        >
+          Clear all
+        </button>
       )}
     </header>
   );

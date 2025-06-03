@@ -8,7 +8,7 @@ import { Accordion } from "@/components/ui/accordion";
 
 export default function FilterSidebar() {
   return (
-    <aside className="col-span-3">
+    <aside>
       <FilterHeader />
       <Accordion type="single" collapsible>
         <FilterByGenre />

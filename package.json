@@ -26,7 +26,8 @@
     "react-dom": "^19.0.0",
     "react-range-slider-input": "^3.2.1",
     "swiper": "^11.2.8",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.0",
+    "zod": "^3.25.48"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -5,10 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formattedSearchParams = (name: string) =>
+export const formatSearchParams = (name: string) =>
   name.toLowerCase().split(" ").join("-");
 
-export const reverseFormattedSearchParams = (name: string) =>
+export const reverseFormatSearchParams = (name: string) =>
   name.toLowerCase().split("-").join(" ");
 
 export const formatPrice = (price: number) => {

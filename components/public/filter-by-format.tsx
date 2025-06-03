@@ -1,60 +1,49 @@
 "use client";
 
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { formattedSearchParams } from "@/lib/utils";
-import { FORMATS } from "@/types/book.type";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FilterDeleteButton from "@/components/public/filter-delete-button";
+import FilterWrapper from "@/components/public/filter-wrapper";
+import useCreateSearchParams from "@/hooks/useCreateSearchParams";
+import { bookFormatSchema } from "@/types/book.type";
+import { CheckCircleIcon } from "lucide-react";
 
 export default function FilterByFormat() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const value = "format";
 
-  const format = searchParams.get("format");
-
-  const handleChange = (term: string) => {
-    const param = new URLSearchParams(searchParams);
-
-    if (term) param.set("format", term);
-    else param.delete("format");
-
-    replace(`${pathname}?${param.toString()}`);
-  };
+  const { isMatchingSearchParams, changeSearchParams } =
+    useCreateSearchParams();
+  const isChecked = (name: string) => isMatchingSearchParams(value, name);
 
   return (
-    <AccordionItem value="format">
-      <AccordionTrigger>Format</AccordionTrigger>
-      <AccordionContent>
-        <ul className="grid grid-cols-2 gap-2">
-          {FORMATS.map((item) => {
-            const formatItem = formattedSearchParams(item);
+    <FilterWrapper value={value}>
+      <ul>
+        {bookFormatSchema.options.map((item) => (
+          <label key={item}>
+            <label
+              key={item}
+              className="size-full flex-center gap-5 py-1.5 px-3 has-checked:bg-foreground rounded-md cursor-pointer hover:bg-muted/30 duration-300"
+            >
+              <input
+                type="radio"
+                name={value}
+                hidden
+                checked={isChecked(item)}
+                onChange={() => changeSearchParams(value, item)}
+                className="peer"
+              />
 
-            return (
-              <li
-                key={item}
-                className={`hover:bg-muted duration-300 ${
-                  formatItem === format &&
-                  "text-background bg-foreground hover:!bg-foreground"
-                }`}
-              >
-                <label className="flex items-center-safe gap-2 py-1.5 px-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="format"
-                    checked={formatItem === format}
-                    onChange={() => handleChange(formatItem)}
-                  />
-                  <span>{item}</span>
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-      </AccordionContent>
-    </AccordionItem>
+              <div className="size-2 rounded-full bg-foreground peer-checked:hidden" />
+
+              <CheckCircleIcon className="size-3.5 peer-checked:text-background hidden peer-checked:block" />
+
+              <div className="flex-1 peer-checked:text-background peer-checked:scale-110 peer-checked:font-bold duration-300">
+                {item}
+              </div>
+            </label>
+          </label>
+        ))}
+      </ul>
+
+      <FilterDeleteButton value={value} side="left" />
+    </FilterWrapper>
   );
 }

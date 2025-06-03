@@ -1,65 +1,50 @@
 "use client";
 
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import FilterDeleteButton from "@/components/public/filter-delete-button";
+import FilterWrapper from "@/components/public/filter-wrapper";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import genres from "@/data/genre";
-import { formattedSearchParams } from "@/lib/utils";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useCreateSearchParams from "@/hooks/useCreateSearchParams";
+import { CheckCircleIcon } from "lucide-react";
 
 export default function FilterByGenre() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const value = "genre";
 
-  const genre = searchParams.get("genre");
-
-  const handleChange = (term: string) => {
-    const param = new URLSearchParams(searchParams);
-
-    if (term) param.set("genre", term);
-    else param.delete("genre");
-
-    replace(`${pathname}?${param.toString()}`);
-  };
+  const { isMatchingSearchParams, changeSearchParams } =
+    useCreateSearchParams();
+  const isChecked = (name: string) => isMatchingSearchParams(value, name);
 
   return (
-    <AccordionItem value="genre">
-      <AccordionTrigger>Genre</AccordionTrigger>
-      <AccordionContent>
-        <ScrollArea className="h-60 pr-2">
-          <ul>
-            {genres.map((item) => {
-              const format = formattedSearchParams(item.name);
+    <FilterWrapper value={value}>
+      <ScrollArea className="h-80 pr-4">
+        {genres.map(({ id, name }) => (
+          <label
+            key={id}
+            className="size-full flex-center gap-5 py-1.5 px-3 has-checked:bg-foreground rounded-md cursor-pointer hover:bg-muted/30 duration-300"
+          >
+            <input
+              type="radio"
+              name={value}
+              hidden
+              checked={isChecked(name)}
+              onChange={() => changeSearchParams(value, name)}
+              className="peer"
+            />
 
-              return (
-                <li
-                  key={item.id}
-                  className={`hover:bg-muted duration-300 ${
-                    format === genre &&
-                    "text-background bg-foreground hover:!bg-foreground"
-                  }`}
-                >
-                  <label className="flex items-center-safe gap-2 py-1.5 px-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="genre"
-                      checked={format === genre}
-                      onChange={() => handleChange(format)}
-                    />
-                    <span>{item.name}</span>
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
+            <div className="size-2 rounded-full bg-foreground peer-checked:hidden" />
 
-          <ScrollBar />
-        </ScrollArea>
-      </AccordionContent>
-    </AccordionItem>
+            <CheckCircleIcon className="size-3.5 peer-checked:text-background hidden peer-checked:block" />
+
+            <div className="flex-1 peer-checked:text-background peer-checked:scale-110 peer-checked:font-bold duration-300">
+              {name}
+            </div>
+          </label>
+        ))}
+
+        <ScrollBar />
+      </ScrollArea>
+
+      <FilterDeleteButton value={value} side="left" />
+    </FilterWrapper>
   );
 }

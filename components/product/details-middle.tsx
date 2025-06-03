@@ -1,7 +1,7 @@
 import InfoItem from "@/components/product/info-item";
 import StarRating from "@/components/public/star-rating";
 import genres from "@/data/genre";
-import { formatDate, formattedSearchParams } from "@/lib/utils";
+import { formatDate, formatSearchParams } from "@/lib/utils";
 import Link from "next/link";
 
 export default function DetailsMiddle() {
@@ -22,7 +22,7 @@ export default function DetailsMiddle() {
         {genres.slice(0, 6).map((item) => (
           <Link
             key={item.id}
-            href={`/shop?genre=${formattedSearchParams(item.name)}`}
+            href={`/shop?genre=${formatSearchParams(item.name)}`}
             className="p-1 text-muted duration-300 cursor-pointer shadow-[0px_1.5px] shadow-muted hover:shadow-foreground hover:text-foreground"
           >
             {item.name}

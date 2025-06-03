@@ -1,7 +1,7 @@
 import AccountHeader from "@/components/account/account-header";
 import AccountSidebar from "@/components/account/account-sidebar";
 import Navbar from "@/components/layout/navbar";
-import CustomBreadcrumb from "@/components/public/custom-breadcrumb";
+import CustomBreadcrumb from "@/components/ui/breadcrumb";
 
 export default function AuthLayout({
   children,

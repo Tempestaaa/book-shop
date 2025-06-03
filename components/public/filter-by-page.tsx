@@ -1,76 +1,48 @@
 "use client";
 
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FilterDeleteButton from "@/components/public/filter-delete-button";
+import FilterWrapper from "@/components/public/filter-wrapper";
+import { pageFilter } from "@/data/common";
+import useCreateSearchParams from "@/hooks/useCreateSearchParams";
+import { CheckCircleIcon } from "lucide-react";
 
 export default function FilterByPage() {
-  const pages: { name: string; minValue?: number; maxValue?: number }[] = [
-    {
-      name: "<100",
-      maxValue: 99,
-    },
-    {
-      name: "100-300",
-      minValue: 100,
-      maxValue: 299,
-    },
-    {
-      name: "300-500",
-      minValue: 300,
-      maxValue: 499,
-    },
-    {
-      name: ">500",
-      minValue: 500,
-    },
-  ];
+  const value = "page";
 
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const { getSearchParamsValue, changeSearchParams } = useCreateSearchParams();
 
-  const minPage = Number(searchParams.get("minPage"));
-  const maxPage = Number(searchParams.get("maxPage"));
+  const minPage = Number(getSearchParamsValue(value)?.split("-")[0]);
+  const maxPage = Number(getSearchParamsValue(value)?.split("-")[1]);
 
-  const handleChange = (minValue?: number, maxValue?: number) => {
-    const param = new URLSearchParams(searchParams);
-
-    if (minValue) param.set("minPage", minValue.toString());
-    else param.delete("minPage");
-    if (maxValue) param.set("maxPage", maxValue.toString());
-    else param.delete("maxPage");
-
-    replace(`${pathname}?${param.toString()}`);
-  };
+  const isChecked = (min: number, max: number) =>
+    minPage >= min && maxPage <= max ? true : false;
 
   return (
-    <AccordionItem value="page">
-      <AccordionTrigger>Page</AccordionTrigger>
-      <AccordionContent>
-        <ul className="grid grid-cols-2 gap-2">
-          {pages.map((item) => {
-            return (
-              <li key={item.name} className={`hover:bg-muted duration-300`}>
-                <label className="flex items-center-safe gap-2 py-1.5 px-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="page"
-                    checked={
-                      minPage === item.minValue || maxPage === item.maxValue
-                    }
-                    onChange={() => handleChange(item.minValue, item.maxValue)}
-                  />
-                  <span>{item.name}</span>
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-      </AccordionContent>
-    </AccordionItem>
+    <FilterWrapper value={value}>
+      <ul>
+        {pageFilter.map(({ label, min, max }) => (
+          <label
+            key={min + "-" + max}
+            className="size-full flex-center gap-5 py-1.5 px-3 has-checked:bg-foreground rounded-md cursor-pointer hover:bg-muted/30 duration-300"
+          >
+            <input
+              type="radio"
+              name={value}
+              hidden
+              checked={isChecked(min, max)}
+              onChange={() => changeSearchParams(value, `${min + "-" + max}`)}
+              className="peer"
+            />
+            <div className="size-2 rounded-full bg-foreground peer-checked:hidden" />
+            <CheckCircleIcon className="size-3.5 peer-checked:text-background hidden peer-checked:block" />
+            <div className="flex-1 peer-checked:text-background peer-checked:scale-110 peer-checked:font-bold duration-300">
+              {label}
+            </div>
+          </label>
+        ))}
+      </ul>
+
+      <FilterDeleteButton value={value} side="left" />
+    </FilterWrapper>
   );
 }

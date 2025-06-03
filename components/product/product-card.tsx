@@ -12,7 +12,7 @@ export default function ProductCard() {
 
         <Button className="absolute bottom-2 right-2 hidden group-hover:inline-flex gap-4">
           <ShoppingCartIcon />
-          <span>Add to Cart</span>
+          <div>Add to Cart</div>
         </Button>
       </div>
 

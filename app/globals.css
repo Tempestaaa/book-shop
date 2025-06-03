@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
   --color-destructive: var(--destructive);
   --color-muted: var(--muted);
+  --color-sub: var(--sub);
   --color-star: var(--star);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -21,11 +22,12 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --destructive: #dc143c;
-  --muted: #808080;
-  --star: #fdc700;
+  --background: oklch(0.9897 0.0066 106.52);
+  --foreground: oklch(0.0672 0 0);
+  --destructive: oklch(0.5274 0.202 22.71);
+  --muted: oklch(0.7252 0 0);
+  --sub: oklch(0.9731 0 0);
+  --star: oklch(0.8535 0.1744 88.77);
 }
 
 .dark {
@@ -48,6 +50,34 @@
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+  p,
+  span {
+    @apply text-base;
+  }
+  h5 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-[32px];
+  }
+  h3 {
+    @apply text-[40px];
+  }
+  h2 {
+    @apply text-5xl;
+  }
+  h1 {
+    @apply text-[56px];
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center-safe;
+  }
+  .grid-center {
+    @apply grid place-items-center-safe;
   }
 }
 

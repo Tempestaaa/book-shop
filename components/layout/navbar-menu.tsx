@@ -1,34 +1,12 @@
-import genres from "@/data/genre";
-import { formattedSearchParams } from "@/lib/utils";
-import { BookGenre } from "@/types/book.type";
-import { Menu } from "@/types/common.type";
+import { navbarMenu } from "@/data/common";
+import { formatSearchParams } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function NavbarMenu() {
-  const links: Menu<BookGenre>[] = [
-    {
-      name: "Shop",
-      href: "/shop",
-    },
-    {
-      name: "New released",
-      href: "/shop?q=new",
-    },
-    {
-      name: "Genres",
-      href: "/shop",
-      children: genres,
-    },
-    {
-      name: "About",
-      href: "/about",
-    },
-  ];
-
   return (
     <ul className="flex items-center-safe justify-center-safe gap-2 h-14 z-[90]">
-      {links.map((item, id) => (
+      {navbarMenu.map((item, id) => (
         <li key={id} className="group relative">
           <Link
             href={item.href}
@@ -46,7 +24,7 @@ export default function NavbarMenu() {
               {item.children.map((o) => (
                 <Link
                   key={o.id}
-                  href={`/shop?genre=${formattedSearchParams(o.name)}`}
+                  href={`/shop?genre=${formatSearchParams(o.name)}`}
                   className="hover:bg-foreground hover:text-background duration-300 rounded p-2 text-sm"
                 >
                   {o.name}
